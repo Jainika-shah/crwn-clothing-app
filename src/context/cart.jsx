@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useReducer } from "react";
 
 const addNewItem = (cartItems, productToAdd) => {
     const product = cartItems.find(item => item.id === productToAdd.id)
@@ -38,16 +38,53 @@ export const CartContext = createContext({
     removeItemFromCart: () => null
 })
 
-export const DropdownProvider = ({ children }) => {
-    const [isCartOpen, setIsCartOpen] = useState(false);
-    const [cartItems, setCartItems] = useState([]);
+const INITIAL_STATE = {
+    isCartOpen: false,
+    cartItems: []
+}
 
+const cartReducer = (state, action) => {
+    const { type, payload } = action;
+    switch(type){
+        case 'TOGGLE_CART':
+            return {
+                ...state,
+                isCartOpen: !state.isCartOpen
+            } 
+        case 'SET_CART_ITEMS':
+            return {
+                ...state,
+                cartItems: payload
+            }
+        default: 
+            throw new Error(`Unhandled type ${type} in cart reducer`)
+    }
+}
+
+export const DropdownProvider = ({ children }) => {
+    // const [isCartOpen, setIsCartOpen] = useState(false);    
+    // const [cartItems, setCartItems] = useState([]);
+
+    //using reducer:
+    const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE)
+    const { isCartOpen, cartItems } = state;
+
+    // dispatchers:
+    const setIsCartOpen = () => {
+        dispatch({type: 'TOGGLE_CART'})
+    }
+    const setCartItems = (items) => {
+        dispatch({type: 'SET_CART_ITEMS', payload: items })
+    }
+
+    // add-remove item
     const addItemToCart = (productToAdd) => {
         setCartItems(addNewItem(cartItems, productToAdd))
     }
     const removeItemFromCart = (productToRemove) => {
         setCartItems(removeItem(cartItems, productToRemove))
     }
+    
     const value = {
         isCartOpen, setIsCartOpen, addItemToCart, cartItems, removeItemFromCart
     }
