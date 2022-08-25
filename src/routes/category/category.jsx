@@ -3,11 +3,14 @@ import { useContext, useEffect, useState } from 'react';
 import { ProductsContext } from '../../context/products';
 import { useParams } from 'react-router-dom';
 import ProductCard from '../../components/product-card/product-card';
-
+import { useSelector } from 'react-redux';
+import { selectCategoriesMap } from '../../store/categories/category-selector';
 const Catgeory = () => {
     const { category } = useParams();
-    // console.log(useParams());
-    const { products } = useContext(ProductsContext)
+    // console.log("catgory component..");
+    // const { products } = useContext(ProductsContext)
+    const products = useSelector(selectCategoriesMap);
+
     const [currentP, setCurrentP] = useState([]);
 
     useEffect(() => {

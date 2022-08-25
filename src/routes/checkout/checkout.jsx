@@ -2,8 +2,12 @@ import CheckoutCard from "../../components/checkout-card/checkout-card";
 import { useContext } from "react";
 import { CartContext } from "../../context/cart";
 import './checkout.scss';
+import { useSelector } from 'react-redux';
+import { selectCartItems } from '../../store/cart/cart-selector';
+
 const CheckOut = () => {
-  const { cartItems } = useContext(CartContext);
+  // const { cartItems } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems)
   
   const total = cartItems.reduce((acc, elm) => {
     return acc + elm.price * elm.quantity;

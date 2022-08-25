@@ -3,15 +3,19 @@ import { Fragment, useContext } from "react";
 import { UserContext } from "../../context/user";
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import { signOutUser } from "../../utils/firebase/firebase";
-
+import { selectCurrentUser } from "../../store/user/user-selector";
 import './navigation.scss';
 import CartIcon from "../../components/cart-icon/cart-icon";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown";
 import { CartContext } from "../../context/cart";
+import { useSelector } from "react-redux";
+import { selectIsCartOpen } from "../../store/cart/cart-selector";
 
  const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartContext);
+  const currentUser = useSelector(selectCurrentUser)
+  const isCartOpen = useSelector(selectIsCartOpen)
+  // const { currentUser } = useContext(UserContext);
+  // const { isCartOpen } = useContext(CartContext);
 
     return (
       <Fragment>
