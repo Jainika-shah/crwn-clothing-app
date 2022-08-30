@@ -4,20 +4,15 @@ import Catgeory from '../category/category';
 import './shop.scss';
 import { useDispatch } from 'react-redux';
 import { useEffect } from "react";
-import { getCategoriesAndDocuments } from '../../utils/firebase/firebase';
-import { setCatgeriesMap } from '../../store/categories/category-action';
+import { fetchCategoriesAsync } from '../../store/categories/category-action';
 
 const Shop = () => {
   const dispatch = useDispatch();
   // console.log("shop component..")
 
   useEffect(() => {
-    const getCategoriesMap = async () => {
-       const categoryMap = await getCategoriesAndDocuments()
-        dispatch(setCatgeriesMap(categoryMap))
-    }
-    getCategoriesMap();
-}, [dispatch])
+    dispatch(fetchCategoriesAsync())
+}, [])
 
   return (
     <Routes>

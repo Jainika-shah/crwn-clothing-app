@@ -9,3 +9,5 @@
 
 
 export const selectCategoriesMap = (state) => state.categories.categoriesMap
+
+export const selectIsLoading = (state) => { console.log(state); return state.categories.isLoading}
