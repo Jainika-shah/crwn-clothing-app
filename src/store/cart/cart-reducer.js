@@ -1,11 +1,12 @@
 const INITIAL_STATE = {
     isCartOpen: false,
-    cartItems: []
+    cartItems: [],
+    cartTotal: 0
 }
 
 export const cartReducer = (state=INITIAL_STATE, action={}) => {
     const { type, payload } = action;
-    console.log("cartRedicer")
+    // console.log("cartReducer")
     switch(type){
         case 'TOGGLE_CART':
             return {
@@ -17,6 +18,11 @@ export const cartReducer = (state=INITIAL_STATE, action={}) => {
                 ...state,
                 cartItems: payload
             }
+        case 'SET_CART_TOTAL':
+            return{
+                ...state,
+                cartTotal: payload
+            } 
         default: 
             return state;
     }

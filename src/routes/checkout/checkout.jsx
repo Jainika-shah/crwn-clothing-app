@@ -4,14 +4,20 @@ import { CartContext } from "../../context/cart";
 import './checkout.scss';
 import { useSelector } from 'react-redux';
 import { selectCartItems } from '../../store/cart/cart-selector';
+import PaymentForm from "../../components/payment-form/payment-form";
+import { useDispatch } from 'react-redux';
+import { setCartTotal } from "../../store/cart/cart-action";
 
 const CheckOut = () => {
+  const dispatch = useDispatch();
+
   // const { cartItems } = useContext(CartContext);
   const cartItems = useSelector(selectCartItems)
   
   const total = cartItems.reduce((acc, elm) => {
     return acc + elm.price * elm.quantity;
   }, 0) 
+  dispatch(setCartTotal(total))  
 
   return (
     <div className="checkout-container">
@@ -38,7 +44,7 @@ const CheckOut = () => {
       ))}
 
       <span className="total">Total: ${total} </span>
-    
+      <PaymentForm/>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import { addItemToCart, removeItemFromCart } from "../../store/cart/cart-action"
 import { useSelector } from "react-redux";
 import { selectCartItems } from "../../store/cart/cart-selector";
 
+
 const CheckoutCard = ({ product }) => {
   const { name, imageUrl, quantity, price } = product;
   const dispatch = useDispatch();

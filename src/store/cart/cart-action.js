@@ -33,7 +33,6 @@ export const setIsCartOpen = (boolValue) => {
     return {type: 'TOGGLE_CART', payload: boolValue}
 }
 
-
 export const removeItemFromCart = (cartItems, productToRemove) => {
     let items = removeItem(cartItems, productToRemove)
     return {type: 'SET_CART_ITEMS', payload: items}
@@ -42,4 +41,8 @@ export const removeItemFromCart = (cartItems, productToRemove) => {
 export const addItemToCart = (cartItems, productToAdd) => {
     let items = addNewItem(cartItems, productToAdd)
     return {type: 'SET_CART_ITEMS', payload: items}
+}
+
+export const setCartTotal = (cartTotal) => {
+    return { type: 'SET_CART_TOTAL', payload: cartTotal}
 }

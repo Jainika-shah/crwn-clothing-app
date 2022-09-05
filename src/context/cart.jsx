@@ -40,7 +40,8 @@ export const CartContext = createContext({
 
 const INITIAL_STATE = {
     isCartOpen: false,
-    cartItems: []
+    cartItems: [],
+    cartTotal: 0
 }
 
 const cartReducer = (state, action) => {
@@ -56,6 +57,11 @@ const cartReducer = (state, action) => {
                 ...state,
                 cartItems: payload
             }
+        case 'SET_CART_TOTAL':
+            return{
+                ...state,
+                cartTotal: payload
+            }    
         default: 
             throw new Error(`Unhandled type ${type} in cart reducer`)
     }

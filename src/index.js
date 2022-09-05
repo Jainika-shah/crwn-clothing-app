@@ -4,11 +4,13 @@ import "./index.scss";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
-import { UserProvider } from "./context/user";
-import { ProductsProvider } from "./context/products";
-import { DropdownProvider } from "./context/cart";
+// import { UserProvider } from "./context/user";
+// import { ProductsProvider } from "./context/products";
+// import { DropdownProvider } from "./context/cart";
 import { Provider } from "react-redux";
 import { store } from "./store/store";
+import { Elements } from "@stripe/react-stripe-js";
+import { stripePromise } from "./utils/stripe/stripe";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -18,7 +20,9 @@ root.render(
       {/* <UserProvider> */}
         {/* <ProductsProvider> */}
           {/* <DropdownProvider> */}
+          <Elements stripe={stripePromise}>
             <App />
+          </Elements>
           {/* </DropdownProvider> */}
         {/* </ProductsProvider> */}
       {/* </UserProvider> */}

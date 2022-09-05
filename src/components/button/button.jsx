@@ -2,12 +2,14 @@ import './button.scss';
 const BUTTON_CLASSES = {
     google: 'google-sign-in',
     inverted: 'inverted',
-    emailSignIn: 'email-sign-in'
+    emailSignIn: 'email-sign-in',
+    disabledBtn: 'disabled-btn'
 }
 
-const Button = ({ children, buttonType, ...otherProps }) => {
+const Button = ({ children, buttonType, isLoading,...otherProps }) => {
+    // console.log("isloading", isLoading)
     return (
-        <button className={`button-container ${BUTTON_CLASSES[buttonType]}`} {...otherProps}> {children} </button>
+        <button disabled={isLoading} className={`button-container ${BUTTON_CLASSES[buttonType]} ${isLoading ? 'disabled-btn' : '' }`} {...otherProps}> {children} </button>
     )
 }
 

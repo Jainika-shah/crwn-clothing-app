@@ -67,7 +67,7 @@ export const createUserDocument = async (userAuth) => {
         createdAt,
       });
     } catch (error) {
-      console.log("alert: error creating a new user- ", error.message);
+      // console.log("alert: error creating a new user- ", error.message);
     }
   }
   return userDocRef;
